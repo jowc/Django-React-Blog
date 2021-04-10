@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block title%}
+{% load static %}
+<form method="POST">
+  {% csrf_token %}
+  <!-- <label> Title</label>
+  <input type="text" name="title" /><br />
+  <label> slug</label>
+  <input type="text" name="slug" /><br />
+  <label> description</label>
+  <textarea col="40" row="40" name="description"></textarea> -->
+  {{ post.as_p }}
+  <button>Publish</button>
+</form>
+{% endblock %}

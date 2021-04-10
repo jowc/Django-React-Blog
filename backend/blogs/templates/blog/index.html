@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block title%}
+<p>
+<a href="{% url 'new_article' %}"/> New Article</a>|<a href="{% url 'blog' %}"/> blog</a>
+ </p>
+ {% for post in post %}
+<h1>{{post.title}}</h1>
+<p>{{post.summaryTXT}}</p>
+<a href="{{post.slug}}"> Read More </a>
+{% endfor %} {% endblock %}

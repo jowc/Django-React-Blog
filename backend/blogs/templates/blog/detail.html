@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block title%}
+
+<h1>{{post.title}}</h1>
+<p>{{post.description}}</p>
+
+<div>
+    <div>
+        <a href="{{post.get_edit_url}}">Edit</a>
+    </div>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <!-- <input type="button" value="Delete"> -->
+            <button name="deletePost" value="Delete">Delete</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
