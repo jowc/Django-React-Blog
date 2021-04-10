@@ -61,5 +61,3 @@
  )
 
   export default dummyData
-
-  let a = "ant"
