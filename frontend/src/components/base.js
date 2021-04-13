@@ -4,7 +4,7 @@ let CreatorName = 'Joe Seph'
 export function Header() {
   return (
     <div className="bg-blue-600 shadow-md flex w-full">
-    <div className="flex items-center h-12 justify-between mb-0 mx-auto my-0 max-w-5xl w-11/12">
+    <div className="flex items-center h-12 justify-between mx-auto my-0 w-11/12">
       <span className="items-center text-white font-bold uppercase">
         {CreatorName}
       </span>
@@ -27,7 +27,7 @@ export function Header() {
 export function Footer() {
   return (
     <div className="bg-blue-600 p-4 w-full">
-    <div className="m-0 text-white">
+    <div className="m-0 text-white max-w-8/12">
       &copy; Copyright 2020.
     </div>
   </div>
