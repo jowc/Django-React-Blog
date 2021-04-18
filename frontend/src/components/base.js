@@ -1,7 +1,11 @@
-let CreatorName = 'Joe Seph'
+import {Link} from 'react-router-dom'
+
+
 
 
 export function Header() {
+  let CreatorName = 'Joe Seph'
+
   return (
     <div className="bg-blue-600 shadow-md flex w-full">
     <div className="flex items-center h-12 justify-between mx-auto my-0 w-11/12">
@@ -10,13 +14,13 @@ export function Header() {
       </span>
       <div className="flex items-center justify-center space-x-8 text-white capitalize">
         <div>
-          home
+          <Link to="/">home</Link>
         </div>
         <div>
-          about
+          <Link to="/">new blog</Link>
         </div>
         <div>
-          contact
+          <Link to="/blogdetail">test</Link>
         </div>
       </div>
     </div>

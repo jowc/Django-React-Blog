@@ -1,13 +1,22 @@
 import { Footer, Header } from "./components/base"
 import Blogs from "./components/blogs";
+import BlogDetail from "./components/blogDetail";
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 const App = () => {
     return ( 
-        <div>
+        <Router>
             <Header />
-            <Blogs />
+                <Switch>
+                    <Route path="/" exact>
+                         <Blogs /> 
+                    </Route>
+                    <Route path="/blogdetail/:slug">
+                         <BlogDetail /> 
+                    </Route>
+                </Switch>
             <Footer />
-        </div>
+        </Router>
      );
 }
  

@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 const Bloglist = ({blogs}) => {
     return ( 
         <div className="flex flex-wrap">
@@ -24,11 +26,11 @@ const Bloglist = ({blogs}) => {
                 {blog.description.slice(0, 80)}<b>...</b>
                 </div>
                 <div className="flex justify-start m-3">
-                  <button
+                  <div
                     className="border-blue-600 rounded-lg border-2 shadow-md font-medium pb-1 pl-4 pr-4 pt-1 text-right text-blue-600"
-                    href="#">
-                    Read More
-                  </button>
+                    >
+                      <Link to={`/blogdetail/${blog.slug}`}>Read More</Link>
+                  </div>
                 </div>
               </div>
             </div>
