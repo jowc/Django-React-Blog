@@ -10,7 +10,6 @@ function Blogs() {
   // console.log(blogs)
   return (
     <div className="my-28 ">
-      < SearchBar blogs={blogs}/>
       <div className="m-auto w-full" >
         <div className="flex flex-col">
           {apiError && <span className="text-center text-red-600 m-auto mt-4"> {apiError} </span>}

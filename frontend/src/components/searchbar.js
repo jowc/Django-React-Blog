@@ -1,28 +1,41 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
+import useApi from '../hooks/useApi'
+import Bloglist from './bloglist'
 
-const SearchBar = ({blog}) => {
-    let searchDom = document.querySelector('#query')
+const SearchBar = () => {
+    const {data: blogs, apiStatus, apiError} = useApi(`http://127.0.0.1:8000/api/blog/list/`)
+
+    // editData(null)
+    
     let [query, editQuery] = useState('')
-    const handleClick = (e) => {
-        // e.preventDefault()
-        if (searchDom.value){
-            editQuery(searchDom.value)
-            if(searchDom.value.length === 0){
-                editQuery('')
-            }
-        }
-        
-    }
+    if (blogs){
+        let searchResult = blogs.filter(res => res.title.includes(query))
+    console.log(searchResult)
 
-    useEffect(()=> console.log(query),[query])
+    }
+    const handleSearch = (e) => {
+        e.preventDefault()
+        let search = document.querySelector('#query').value
+        editQuery(search)
+        console.log(query)
+    }
 
     return ( 
         <div>
             <div className="mb-10 w-full flex justify-center">
-            <input type="search" placeholder="Search Article" className="shadow-md focus:ring-2 focus:ring-blue-600 active:ring-blue-600 text-center border-solid py-2 px-4 text-gray-600" id="query" name="q" onKeyUp={handleClick} />
-            {/* <button className="py-2 px-4 ml-1 bg-blue-600 text-white rounded text-semibold" onKeyUp={handleClick} >Search</button> */}
+            <form onSubmit={handleSearch}>
+            <input type="search" placeholder="Search Article" className="shadow-md focus:ring-2 focus:ring-blue-600 active:ring-blue-600 text-center border-solid py-2 px-4 text-gray-600" id="query" name="q" />
+            <button className="py-2 px-4 ml-1 bg-blue-600 text-white rounded text-semibold">Search</button>
+            </form>
             </div>
-            <h2 className="text-center text-xl"> You searched for: {query}</h2>
+            <div className="m-auto w-full" >
+            <div className="flex flex-col">
+            {apiError && <span className="text-center text-red-600 m-auto mt-4"> {apiError} </span>}
+            {apiStatus && <span className="text-center text-gray-600 m-auto mt-4"> Loading... </span>}
+            </div>
+            {/* {blogs && <h2 className="text-center text-xl"> You searched for: {query}</h2>} */}
+            {blogs && <Bloglist blogs={blogs.filter( res => res.title.includes(query) )}/> }         
+            </div> 
         </div>
      );
 }

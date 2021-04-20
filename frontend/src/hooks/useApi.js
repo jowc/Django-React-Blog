@@ -1,13 +1,14 @@
 import {useState, useEffect} from 'react'
 
 const useApi = (url) => { 
+        let abortCont = new AbortController()
 
         let [data, editData]= useState( null )
         let [apiStatus, setStatus] = useState(true)
         let [apiError, setApiError] = useState(null)
 
         useEffect(()=> {
-            fetch(url)
+            fetch(url, {signal: abortCont.signal})
                     .then(res=> {
                     // console.log(res.json())
                     return res.json()
@@ -18,28 +19,20 @@ const useApi = (url) => {
                     setStatus(false)
                     setApiError(false)
                 })
-                .catch( e => {
+                .catch( err => {
                     // console.log(e.message);
-                    setStatus(false)
-                    // throw "Server error"
-                    setApiError(e.message)
+                    if(err.name === 'AbortError'){
+                        console.log('fetch cleaned')
+                    }else{
+                        setStatus(false)
+                        setApiError(err.message)
+                        // throw "Server error"
+                    }
                 })
                 .then( ()=> {
                     // always executed
                 });
-                // Post request code here
-                /*
-                axios.post('/user', {
-                    firstName: 'Fred',
-                    lastName: 'Flintstone'
-                })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-                */
+                return () => abortCont.abort()
         }, [url])
 
         return {data, apiStatus, apiError}

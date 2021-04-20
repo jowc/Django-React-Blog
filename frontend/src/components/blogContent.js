@@ -1,4 +1,16 @@
+import {useHistory} from 'react-router-dom'
+
 const Blogcontent = ({blog}) => {
+  let history = useHistory()
+
+  const handleDelete = () => {
+    fetch(`http://127.0.0.1:8000/api/blog/delete/${blog.slug}`, {
+      method: 'DELETE',
+    })
+    .then(console.log('Post deleted'))
+    .then(history.push('/')).catch(err => console.log(err))
+  }
+
     return ( 
         <article className="mx-4 sm:mx-8">
             
@@ -11,6 +23,9 @@ const Blogcontent = ({blog}) => {
                   </h1>
                   <div className="mt-5 text-gray-700 text-justify">
                     {blog.description}
+                  </div>
+                  <div className="flex items-end justify-end my-6 w-full">
+                    <button className="border-2 rounded py-2 px-6 mt-4 bg-red-600 text-white" onClick={handleDelete}> Delete </button>
                   </div>
                   <div className="py-6 px-4 bg-gray-50 rounded mt-12">
                     <form className="flex items-start flex-col w-full">
