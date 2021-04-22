@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 # from django.forms import ModelForm
-from .models import article
+from .models import (article, comment)
 
 # Django Forms
 """
@@ -19,4 +19,11 @@ class blogform(forms.Form):
 class Blogmodelform(ModelForm):
     class Meta:
         model = article
-        fields = ['slug', 'title', 'image', 'description', 'category', 'publish_date']
+        fields = ['slug', 'title', 'image',
+                  'content', 'category', 'publish_date']
+
+
+class Commentmodelform(ModelForm):
+    class Meta:
+        model = comment
+        fields = ['comment']

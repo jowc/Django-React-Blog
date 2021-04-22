@@ -3,6 +3,7 @@ import Blogs from "./components/blogs";
 import BlogDetail from "./components/blogDetail";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import NotFound from "./components/notFound";
+import BlogForm from "./components/blogForm";
 
 const App = () => {
     return ( 
@@ -14,6 +15,9 @@ const App = () => {
                     </Route>
                     <Route path="/blogdetail/:slug" exact>
                          <BlogDetail /> 
+                    </Route>
+                    <Route path="/blog/new-blog/" exact>
+                         <BlogForm /> 
                     </Route>
                     <Route path="*">
                          <NotFound /> 

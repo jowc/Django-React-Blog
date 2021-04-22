@@ -17,10 +17,10 @@ export function Header() {
           <Link to="/">home</Link>
         </div>
         <div>
-          <Link to="/">new blog</Link>
+          <Link to="/blog/new-blog/">new blog</Link>
         </div>
         <div>
-          <Link to="/blogdetail">test</Link>
+          <Link to="/blogdetail/">test</Link>
         </div>
       </div>
     </div>

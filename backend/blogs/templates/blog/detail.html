@@ -1,19 +1,46 @@
 {% extends 'base.html' %} {% block title%}
 
 <h1>{{post.title}}</h1>
-<p>{{post.description}}</p>
+<p>{{post.content}}</p>
 
 <div>
     <div>
         <a href="{{post.get_edit_url}}">Edit</a>
     </div>
     <div>
-        <form method="post">
-            {% csrf_token %}
-            <!-- <input type="button" value="Delete"> -->
-            <button name="deletePost" value="Delete">Delete</button>
-        </form>
+            <a href="http://127.0.0.1:8000/blog/{{post.slug}}">Delete</a>
+
     </div>
+</div>
+
+<hr>
+<div>
+    <h2>comments ({{comment.count}})</h2>
+    {% for comment in comment %}
+        <div style="padding: 10px;">
+          <p>
+            <span>
+              {{ comment.created_on }}
+            </span>
+          </p>
+          {{ comment.comment | linebreaks }}
+        </div>
+    {% endfor %}
+
+    <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+          Your comment is awaiting moderation
+        </div>
+        {% else %}
+        <h3>Leave a comment</h3>
+        <form method="post" style="margin-top: 1.3em;">
+          {{ comment_form.as_p }}
+          {% csrf_token %}
+          <button type="submit">Submit</button>
+        </form>
+        {% endif %}
+      </div>
 </div>
 
 {% endblock %}

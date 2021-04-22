@@ -1,9 +1,9 @@
 import {useState} from 'react'
-import useApi from '../hooks/useApi'
+import searchHook from '../hooks/searchHook'
 import Bloglist from './bloglist'
 
 const SearchBar = () => {
-    const {data: blogs, apiStatus, apiError} = useApi(`http://127.0.0.1:8000/api/blog/list/`)
+    const {data: blogs, apiStatus, apiError} = searchHook(`http://127.0.0.1:8000/api/blog/list/`)
 
     // editData(null)
     
@@ -17,6 +17,8 @@ const SearchBar = () => {
         e.preventDefault()
         let search = document.querySelector('#query').value
         editQuery(search)
+        let searchResult = blogs.filter(res => res.title.includes(query))
+        blogs = searchResult
         console.log(query)
     }
 
