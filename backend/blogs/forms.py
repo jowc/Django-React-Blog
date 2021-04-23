@@ -19,7 +19,7 @@ class blogform(forms.Form):
 class Blogmodelform(ModelForm):
     class Meta:
         model = article
-        fields = ['slug', 'title', 'image',
+        fields = ['title', 'image',
                   'content', 'category', 'publish_date']
 
 

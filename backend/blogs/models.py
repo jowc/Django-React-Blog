@@ -1,4 +1,8 @@
+import string
+import random
+
 from django.db import models
+from django.utils.text import slugify
 from django.conf import settings
 
 # Create your models here.
@@ -6,10 +10,14 @@ from django.conf import settings
 User = settings.AUTH_USER_MODEL
 
 
+def rand_slug():
+    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
+
+
 class article(models.Model):
     author = models.ForeignKey(
         User, default=1, null=True, on_delete=models.SET_NULL)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, null=True, blank=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)
     title = models.CharField(max_length=225)
     content = models.TextField(max_length=5000)
@@ -36,6 +44,11 @@ class article(models.Model):
 
     def summaryTXT(self):
         return self.content[:60] + "..."
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title + "-" + rand_slug())
+        super(article, self).save(*args, **kwargs)
 
 
 class comment(models.Model):

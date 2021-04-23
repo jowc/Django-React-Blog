@@ -30,6 +30,8 @@ def create_blog(request):
             # article.objects.create(**pl)
             print('Post submitted successfully')
             form = Blogmodelform()
+            redirect('/blog')
+
     else:
         form = Blogmodelform()
         print('upload error')
