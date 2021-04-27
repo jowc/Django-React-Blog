@@ -17,7 +17,7 @@ def rand_slug():
 class article(models.Model):
     author = models.ForeignKey(
         User, default=1, null=True, on_delete=models.SET_NULL)
-    slug = models.SlugField(unique=True, null=True, blank=True)
+    slug = models.SlugField(unique=True, null=False, blank=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)
     title = models.CharField(max_length=225)
     content = models.TextField(max_length=5000)
@@ -52,6 +52,7 @@ class article(models.Model):
 
 
 class comment(models.Model):
+    # reference a post model
     post = models.ForeignKey(
         article, null=True, on_delete=models.CASCADE, related_name='comment')
     # author = models.ForeignKey(User, default=1, null=True, on_delete=models.SET_NULL)

@@ -27,11 +27,7 @@ def create_blog(request):
         form = Blogmodelform(request.POST)
         if form.is_valid():
             form.save()
-            # article.objects.create(**pl)
-            print('Post submitted successfully')
-            form = Blogmodelform()
-            redirect('/blog')
-
+            return redirect('blog')
     else:
         form = Blogmodelform()
         print('upload error')
