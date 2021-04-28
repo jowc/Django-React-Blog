@@ -23,7 +23,7 @@ const Bloglist = ({blogs}) => {
                 {blog.category}
                 </h1>
                 <div className="m-4 text-left">
-                {blog.description.slice(0, 80)}<b>...</b>
+                {blog.content.slice(0, 80)}<b>...</b>
                 </div>
                 <div className="flex justify-start m-3">
                   <div

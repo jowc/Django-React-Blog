@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import {useHistory} from 'react-router-dom'
+import Postcomment from './postComment'
 
 const Blogcontent = ({blog}) => {
   let history = useHistory()
@@ -8,7 +10,8 @@ const Blogcontent = ({blog}) => {
       method: 'DELETE',
     })
     .then(console.log('Post deleted'))
-    .then(history.push('/')).catch(err => console.log(err))
+    .then(history.push('/'))
+    .catch(err => console.log(err))
   }
 
     return ( 
@@ -22,19 +25,13 @@ const Blogcontent = ({blog}) => {
                     {blog.title}
                   </h1>
                   <div className="mt-5 text-gray-700 text-justify">
-                    {blog.description}
+                    {blog.content}
                   </div>
                   <div className="flex items-end justify-end my-6 w-full">
                     <button className="border-2 rounded py-2 px-6 mt-4 bg-red-600 text-white" onClick={handleDelete}> Delete </button>
                   </div>
                   <div className="py-6 px-4 bg-gray-50 rounded mt-12">
-                    <form className="flex items-start flex-col w-full">
-                      <label>Write your comment:</label>
-                      <textarea
-                        className="bg-white border-gray-200 rounded shadow tracking-tighter py-2 px-3 resize-none text-gray-700 w-full mt-4"
-                      cols="5" rows="5"></textarea>
-                      <button className="border-2 rounded py-2 px-6 mt-4">Comment</button>
-                    </form>
+                    <Postcomment />
                   </div>
 
                   </article>
