@@ -132,7 +132,7 @@ def blogCreate(request):
         print('content valid')
         serializer.save()
     else:
-        print('didn\'t work')
+        print('Not Valid')
     return Response(serializer.data)
 
 

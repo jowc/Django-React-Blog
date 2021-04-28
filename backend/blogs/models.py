@@ -4,6 +4,7 @@ import random
 from django.db import models
 from django.utils.text import slugify
 from django.conf import settings
+from django.utils import timezone
 
 # Create your models here.
 
@@ -28,8 +29,7 @@ class article(models.Model):
     )
     category = models.TextField(
         choices=categories, null=True)
-    publish_date = models.DateTimeField(
-        auto_now=False, auto_now_add=False, null=True, blank=True)
+    publish_date = models.DateTimeField(default=timezone.now)
     timestamp = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
 
